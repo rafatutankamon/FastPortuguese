@@ -3,14 +3,17 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class Initializer : MonoBehaviour {
+    //private 
   
+
+    //public
     public GameObject listItemPrefab;
     public GameObject categoryItemPrefab;
     public GameObject grid_Itens;
     public GameObject grid_Categories;
 	void Start () 
     {
-        
+       StartCoroutine(Fullscreen(true));
        //var gd = content.GetComponent<RectTransform>();
        //var cs = content.GetComponent<ContentSizeFitter>();
        //Debug.LogWarning("initial height " + gd.rect.height);
@@ -58,8 +61,20 @@ public class Initializer : MonoBehaviour {
         }
         //scrollrt.Rebuild(CanvasUpdate.LatePreRender);
     }
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    private IEnumerator Fullscreen(bool fullscreen)
+    {
+        int width = Mathf.FloorToInt(720); //Player pref resolution
+        int height = Mathf.FloorToInt(1280);
+        Screen.fullScreen = fullscreen;
+
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        
+        Screen.SetResolution(width, height, Screen.fullScreen);
+    }
+    private void ScaleAdjust()
+    {
+
+    }
 }
