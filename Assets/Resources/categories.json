@@ -1,0 +1,16 @@
+{
+"version": "1.0",
+    "data": {
+            "categories":[
+                          {"id": 1,"name": "Chars","type": 2,"dificulty": 1,"icon": "icon.png"},
+                          {"id": 1,"name": "Numbers","type": 2,"dificulty": 2,"icon": "icon.png" },
+                          {"id": 1,"name": "Colors","type": 2,"dificulty": 2,"icon": "icon.png" },
+                          {"id": 1,"name": "Animals","type": 2,"dificulty": 3,"icon": "icon.png" },
+                          {"id": 1,"name": "Fruits","type": 2,"dificulty": 3,"icon": "icon.png" },
+                          {"id": 1,"name": "Objects","type": 2,"dificulty": 4,"icon": "icon.png" },
+                          {"id": 1,"name": "Complex1","type": 2,"dificulty": 5,"icon": "icon.png" }, 
+                          {"id": 1,"name": "Phrases","type": 2,"dificulty": 5,"icon": "icon.png"}, 
+                        ]
+       
+    }
+}

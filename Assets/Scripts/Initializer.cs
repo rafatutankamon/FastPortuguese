@@ -1,80 +1,150 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using Assets.Classes;
+using System.Linq;
+using System.Collections.Generic;
+using SimpleJSON;
 
 public class Initializer : MonoBehaviour {
     //private 
-  
-
+    private AppScreenParameters _parameters;
+    private string _json;
+    
     //public
-    public GameObject listItemPrefab;
+    public GameObject CANVAS;
+   // public GameObject listItemPrefab;
     public GameObject categoryItemPrefab;
-    public GameObject grid_Itens;
+   // public GameObject grid_Itens;
     public GameObject grid_Categories;
+    public GameObject body;
+    public GameObject header;
+ 
 	void Start () 
     {
-       StartCoroutine(Fullscreen(true));
+       
+       _parameters = new AppScreenParameters();
+       
        //var gd = content.GetComponent<RectTransform>();
        //var cs = content.GetComponent<ContentSizeFitter>();
        //Debug.LogWarning("initial height " + gd.rect.height);
+       //_json = LoadResourceTextfile("categories.json");
+       string jsn = Resources.Load<TextAsset>("categories").text;
+       //JsonData jsonBooks = JsonMapper.ToObject(jsn);
+       JSONNode node = JSON.Parse(jsn);
+      // var name = from c in node["data"]["categories"][0]["name"] select c;
+       JSONArray categories = node["data"]["categories"].AsArray;
       
-       if (grid_Itens != null && grid_Categories !=null)
-        {
-            if (listItemPrefab != null && categoryItemPrefab != null)
-            {    
-               CreateCategoryItens();
-               CreateCategories();
-            }
-            //Debug.LogWarning("final height " + gd.rect.height);
-           // gd.localPosition.Set(gd.localPosition.x, (float)gd.rect.height / 2f, 0);
-        }
-	
-	}
+       for (var i = 0; i < categories.Count;i++ )
+       {
+
+           Debug.LogWarning("nome : " + node["data"]["categories"][i]["name"] + " cor :" + node["data"]["Categories"][i]["color"]);
+           GameObject go = Instantiate(categoryItemPrefab, new Vector3(i, i, 0), Quaternion.identity) as GameObject;
+           go.transform.SetParent(grid_Categories.transform);
+           var id = node["data"]["categories"][i]["id"].AsInt;
+           string name = node["data"]["categories"][i]["name"];
+           var type = node["data"]["categories"][i]["type"].AsInt;
+           var dificulty = node["data"]["categories"][i]["dificulty"].AsInt;
+           go.GetComponentInChildren<Text>().text= name;
+           go.GetComponent<Category>().setParams(id,name,type,dificulty);
+       }
+       
+       /* category cat = JsonUtility.FromJson(categories,category);
+       foreach( var c in categories["name"])
+       {
+           Debug.LogWarning("name" + c);
+           
+       }
+   */
+       //Debug.LogWarning("name" + name);
+       ScaleAdjustPrefabs();
+   	}
 	
     void CreateCategoryItens(string optionalCategory = "favoritos")
     {
-         
-                //rt.sizeDelta = new Vector2(0, 20 * 120);
-                for (int x = 0; x < 20; x++)
-                {
-                    //inatancia o objeto da lista
-                    GameObject go = Instantiate(listItemPrefab, new Vector3(x, x, 0), Quaternion.identity) as GameObject;
-
-                    //go.transform.position = new Vector3(0, x * 120, 0);
-                    go.transform.SetParent(grid_Itens.transform);
-                    //go.GetComponent<RectTransform>().localScale = Vector3.one;
-                    //rt.sizeDelta=new Vector2(rt.sizeDelta.x,x*120);
-                }
-                //scrollrt.Rebuild(CanvasUpdate.LatePreRender);
-    }
-    void CreateCategories()
-    {        
+       /* grid_Itens.GetComponent<RectTransform>().rect.position.Set(0,0);
+        //rt.sizeDelta = new Vector2(0, 20 * 120);
         for (int x = 0; x < 20; x++)
         {
             //inatancia o objeto da lista
-            GameObject go = Instantiate(categoryItemPrefab, new Vector3(x, x, 0), Quaternion.identity) as GameObject;
-
-            //go.transform.position = new Vector3(0, x * 120, 0);
-            go.transform.SetParent(grid_Categories.transform);
-            //go.GetComponent<RectTransform>().localScale = Vector3.one;
-            //rt.sizeDelta=new Vector2(rt.sizeDelta.x,x*120);
+            GameObject go = Instantiate(listItemPrefab, new Vector3(0, _parameters.ListItem.Height * x, 0), Quaternion.identity) as GameObject;            
+            go.transform.SetParent(grid_Itens.transform);
+            
+                    
         }
-        //scrollrt.Rebuild(CanvasUpdate.LatePreRender);
+        var rt = grid_Itens.GetComponent<RectTransform>();
+        grid_Itens.GetComponent<RectTransform>().rect.position.Set(0, (rt.sizeDelta.y / 2) * -1);
+               */ 
+    }
+    void CreateCategories()
+    {        
+        /*for (int x = 0; x < 20; x++)
+        {
+            //inatancia o objeto da lista
+            GameObject go = Instantiate(categoryItemPrefab, new Vector3(x, x, 0), Quaternion.identity) as GameObject;           
+            go.transform.SetParent(grid_Categories.transform);
+           
+        }
+        */
     }
 
-    private IEnumerator Fullscreen(bool fullscreen)
+    
+    private void ScaleAdjustPrefabs()
     {
-        int width = Mathf.FloorToInt(720); //Player pref resolution
-        int height = Mathf.FloorToInt(1280);
-        Screen.fullScreen = fullscreen;
-
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
+       // CANVAS.GetComponent<RectTransform>().sizeDelta = new Vector2(_parameters.MaxWidth, _parameters.MaxHeight);
+      /*  body.GetComponent<RectTransform>().sizeDelta = new Vector2(_parameters.MaxWidth,_parameters.BodyHeight);
         
-        Screen.SetResolution(width, height, Screen.fullScreen);
+        //header.GetComponent<RectTransform>().sizeDelta = new Vector2(_parameters.MaxWidth, _parameters.HeaderHeight);
+        header.GetComponentInChildren<Text>().text = _parameters.MaxWidth + " x " + _parameters.MaxHeight;
+        listItemPrefab.GetComponent<RectTransform>().offsetMax = Vector2.zero;
+        listItemPrefab.GetComponent<RectTransform>().offsetMin = Vector2.zero;
+        listItemPrefab.GetComponent<RectTransform>().sizeDelta =_parameters.ItemListContainerSize;
+        categoryItemPrefab.GetComponent<RectTransform>().sizeDelta = _parameters.CatgoryContainerSize;
+        */
+
+        //CreateCategoryItens();
+        CreateCategories();
+       
     }
-    private void ScaleAdjust()
+
+    //Decode Json into string array
+    private void DecodeJson()
     {
 
     }
+
+    //Load Json from file or downoad from service
+    private IEnumerable LoadJson(bool loadFromfile = true)
+    {
+        if (!loadFromfile)
+        {
+            // download from service
+            //request file from web service
+
+        }
+        else
+        {
+            // request local file json
+        }
+
+        //load all nodes into object array
+
+        yield return new WaitForSeconds(1);
+    }
+
+    public static string LoadResourceTextfile(string fileName)
+    {
+
+        string filePath = "/Assets/Resources/" + fileName.Replace(".json", "");
+
+        TextAsset targetFile = Resources.Load<TextAsset>(filePath);
+
+        return targetFile.text;
+    }
+
+      public class category
+{
+        string name;
+        string color;
+} 
 }
