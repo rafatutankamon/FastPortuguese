@@ -3,16 +3,16 @@ using System.Collections;
 using Assets.Scripts.Enum;
 using UnityEngine.UI;
 
-public class Category : MonoBehaviour {
+public class CategoryItem : MonoBehaviour {
 
     private int _ID;
     private string _Name;
-    private Type _Type;
+    private ContentType _ContentType;
     private Dificulty _Dificult;
 
 	// Use this for initialization
 	void Start () {
-	
+       
 	}
 	
 	// Update is called once per frame
@@ -23,7 +23,7 @@ public class Category : MonoBehaviour {
     {
         _ID = id;
         _Name = name;
-        _Type = (Type)type;
+        _ContentType = (ContentType)type;
         _Dificult = (Dificulty)dificulty;
 
         InitializeComponent();
@@ -33,6 +33,7 @@ public class Category : MonoBehaviour {
     private void InitializeComponent()
     {
         setDificultyLevel();
+        //set icon
     }
 
     private void setDificultyLevel()
@@ -66,6 +67,6 @@ public class Category : MonoBehaviour {
     public void showCategoryItems()
     {
         Debug.LogWarning(" categoria :" + _Name + " was touched");
-
+        ScreenManager.instance.navigateTo(_Name);
     }
 }

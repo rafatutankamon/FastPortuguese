@@ -2,14 +2,14 @@
 "version": "1.0",
     "data": {
             "categories":[
-                          {"id": 1,"name": "Chars","type": 2,"dificulty": 1,"icon": "icon.png"},
-                          {"id": 1,"name": "Numbers","type": 2,"dificulty": 2,"icon": "icon.png" },
-                          {"id": 1,"name": "Colors","type": 2,"dificulty": 2,"icon": "icon.png" },
-                          {"id": 1,"name": "Animals","type": 2,"dificulty": 3,"icon": "icon.png" },
-                          {"id": 1,"name": "Fruits","type": 2,"dificulty": 3,"icon": "icon.png" },
-                          {"id": 1,"name": "Objects","type": 2,"dificulty": 4,"icon": "icon.png" },
-                          {"id": 1,"name": "Complex1","type": 2,"dificulty": 5,"icon": "icon.png" }, 
-                          {"id": 1,"name": "Phrases","type": 2,"dificulty": 5,"icon": "icon.png"}, 
+                          {"ID": 1,"Name": "Chars","ContentType": 2,"Dificulty": 1,"IconPath": "icon.png"},
+                          {"ID": 2,"Name": "Numbers","ContentType": 2,"Dificulty": 2,"IconPath": "icon.png" },
+                          {"ID": 3,"Name": "Colors","ContentType": 2,"Dificulty": 2,"IconPath": "icon.png" },
+                          {"ID": 4,"Name": "Animals","ContentType": 2,"Dificulty": 3,"IconPath": "icon.png" },
+                          {"ID": 5,"Name": "Fruits","ContentType": 2,"Dificulty": 3,"IconPath": "icon.png" },
+                          {"ID": 6,"Name": "Objects","ContentType": 2,"Dificulty": 4,"IconPath": "icon.png" },
+                          {"ID": 7,"Name": "Complex1","ContentType": 2,"Dificulty": 5,"IconPath": "icon.png" }, 
+                          {"ID": 8,"Name": "Phrases","ContentType": 2,"Dificulty": 5,"IconPath": "icon.png"}, 
                         ]
        
     }

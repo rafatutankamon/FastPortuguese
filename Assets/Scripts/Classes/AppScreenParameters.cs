@@ -32,9 +32,10 @@ namespace Assets.Classes
             this._maxHeight = Screen.height;
             this._headerHeight = _maxHeight / 10f;
             this._bodyHeight = _maxHeight - _headerHeight;
-            this._catgoryContainerSize = new Vector2( _maxWidth * 0.5f,_bodyHeight * 0.25f);
+            this._catgoryContainerSize = new Vector2(_maxWidth * 0.5f,_bodyHeight * 0.25f);
             this._itemListContainerSize = new Vector2( _maxWidth ,_bodyHeight * 0.2f);
             this._listItem = new ListItem(_itemListContainerSize.x, _itemListContainerSize.y);
+            
         }
     }
 }

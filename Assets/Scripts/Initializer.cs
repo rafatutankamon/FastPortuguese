@@ -5,12 +5,12 @@ using Assets.Classes;
 using System.Linq;
 using System.Collections.Generic;
 using SimpleJSON;
-
+using Assets.Scripts.Classes;
 public class Initializer : MonoBehaviour {
     //private 
     private AppScreenParameters _parameters;
     private string _json;
-    
+
     //public
     public GameObject CANVAS;
    // public GameObject listItemPrefab;
@@ -22,9 +22,9 @@ public class Initializer : MonoBehaviour {
  
 	void Start () 
     {
-       
+      
        _parameters = new AppScreenParameters();
-       
+       ScaleAdjustPrefabs();
        //var gd = content.GetComponent<RectTransform>();
        //var cs = content.GetComponent<ContentSizeFitter>();
        //Debug.LogWarning("initial height " + gd.rect.height);
@@ -34,11 +34,11 @@ public class Initializer : MonoBehaviour {
        JSONNode node = JSON.Parse(jsn);
       // var name = from c in node["data"]["categories"][0]["name"] select c;
        JSONArray categories = node["data"]["categories"].AsArray;
-      
+      /*
        for (var i = 0; i < categories.Count;i++ )
        {
 
-           Debug.LogWarning("nome : " + node["data"]["categories"][i]["name"] + " cor :" + node["data"]["Categories"][i]["color"]);
+          // Debug.LogWarning("nome : " + node["data"]["categories"][i]["name"] + " cor :" + node["data"]["Categories"][i]["color"]);
            GameObject go = Instantiate(categoryItemPrefab, new Vector3(i, i, 0), Quaternion.identity) as GameObject;
            go.transform.SetParent(grid_Categories.transform);
            var id = node["data"]["categories"][i]["id"].AsInt;
@@ -46,18 +46,22 @@ public class Initializer : MonoBehaviour {
            var type = node["data"]["categories"][i]["type"].AsInt;
            var dificulty = node["data"]["categories"][i]["dificulty"].AsInt;
            go.GetComponentInChildren<Text>().text= name;
-           go.GetComponent<Category>().setParams(id,name,type,dificulty);
-       }
+           go.GetComponent<CategoryItem>().setParams(id,name,type,dificulty);
+       }*/
        
-       /* category cat = JsonUtility.FromJson(categories,category);
-       foreach( var c in categories["name"])
+       
+       foreach( var c in Categories.instance.CategoryList)
        {
-           Debug.LogWarning("name" + c);
+           GameObject go = Instantiate(categoryItemPrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+                                                                       
+           go.transform.SetParent(grid_Categories.transform);
            
+           go.GetComponentInChildren<Text>().text = c.Name;
+           go.GetComponent<CategoryItem>().setParams(c.ID, c.Name,c.ContentType,c.Dificulty);           
        }
-   */
+   
        //Debug.LogWarning("name" + name);
-       ScaleAdjustPrefabs();
+       
    	}
 	
     void CreateCategoryItens(string optionalCategory = "favoritos")
@@ -91,7 +95,11 @@ public class Initializer : MonoBehaviour {
     
     private void ScaleAdjustPrefabs()
     {
-       // CANVAS.GetComponent<RectTransform>().sizeDelta = new Vector2(_parameters.MaxWidth, _parameters.MaxHeight);
+        header.GetComponentInChildren<Text>().text = _parameters.MaxWidth + " x " + _parameters.MaxHeight +"-"+ _parameters.CatgoryContainerSize.x +" "+_parameters.CatgoryContainerSize.y;
+        grid_Categories.GetComponent<GridLayoutGroup>().cellSize = _parameters.CatgoryContainerSize;
+       // grid_Categories.GetComponent<GridLayoutGroup>().spacing = new Vector2(_parameters.CatgoryContainerSize.x,_parameters.CatgoryContainerSize.y);
+       // grid_Categories.GetComponent<GridLayoutGroup>().padding = new RectOffset(10, 10, 5, 5);
+        // CANVAS.GetComponent<RectTransform>().sizeDelta = new Vector2(_parameters.MaxWidth, _parameters.MaxHeight);
       /*  body.GetComponent<RectTransform>().sizeDelta = new Vector2(_parameters.MaxWidth,_parameters.BodyHeight);
         
         //header.GetComponent<RectTransform>().sizeDelta = new Vector2(_parameters.MaxWidth, _parameters.HeaderHeight);
@@ -106,45 +114,6 @@ public class Initializer : MonoBehaviour {
         CreateCategories();
        
     }
-
-    //Decode Json into string array
-    private void DecodeJson()
-    {
-
-    }
-
-    //Load Json from file or downoad from service
-    private IEnumerable LoadJson(bool loadFromfile = true)
-    {
-        if (!loadFromfile)
-        {
-            // download from service
-            //request file from web service
-
-        }
-        else
-        {
-            // request local file json
-        }
-
-        //load all nodes into object array
-
-        yield return new WaitForSeconds(1);
-    }
-
-    public static string LoadResourceTextfile(string fileName)
-    {
-
-        string filePath = "/Assets/Resources/" + fileName.Replace(".json", "");
-
-        TextAsset targetFile = Resources.Load<TextAsset>(filePath);
-
-        return targetFile.text;
-    }
-
-      public class category
-{
-        string name;
-        string color;
-} 
+   
+ 
 }

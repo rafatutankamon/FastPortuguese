@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Assets.Scripts.Enum
 {
-   public enum Type
+   public enum ContentType
    {
        Text = 1,                //This category allows only text itens
        Text_Image =2,           //This category allows text and imagens itens

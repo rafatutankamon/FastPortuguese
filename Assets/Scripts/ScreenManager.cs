@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;       //Allows us to use Lists. 
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;       //Allows us to use Lists. 
 
       
 public class ScreenManager : MonoBehaviour
@@ -8,7 +9,7 @@ public class ScreenManager : MonoBehaviour
         public static ScreenManager instance = null;              //Static instance of ScreeManager which allows it to be accessed by any other script.
         private int level = 1;                                  //Current level number, expressed in game as "Day 1".
         private int CategoryId;
-        
+        private string categoryName;
         //Awake is always called before any Start functions
         void Awake()
         {
@@ -37,8 +38,20 @@ public class ScreenManager : MonoBehaviour
         {
                         
         }
-        
-        
+        public void navigateTo(string category)
+        {
+            this.categoryName = category;
+            //Application.LoadLevel(1);
+            SceneManager.LoadScene(1, LoadSceneMode.Single);
+        }
+        public void backToPreviousScreen()
+        {
+            Application.LoadLevel(0);
+        }
+        public string getCategoryName()
+        {
+            return this.categoryName;
+        }
         
         //Update is called every frame.
         void Update()
