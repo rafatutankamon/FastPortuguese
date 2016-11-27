@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Assets.Scripts.AudioManager">
+    <Position X="24.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAAAAAAAAAAAAIBAAAAEAAEAAAAAAAAIEA=</HashCode>
+      <FileName>Assets\Scripts\AudioManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.CategorySubItem">
+    <Position X="16.25" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>EAQEAAAgASAAAQAEAAQAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\CategorySubItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.ContentManager">
+    <Position X="20.5" Y="5.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAgAAAQAAAQAEAAAAAAABAAAEAIAAQAAAEAEA=</HashCode>
+      <FileName>Assets\Scripts\ContentManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.Menu">
+    <Position X="27.5" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAIACAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Menu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.SplashBehaviour">
+    <Position X="26.25" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAEBAAACAAAAAAAARAEAQAAAAAAAIAAAAAARAAAEA=</HashCode>
+      <FileName>Assets\Scripts\SplashBehaviour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.VisualizeImage">
+    <Position X="18.5" Y="5.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAgAAAAAAAAAAAAAAAAQAAAACAAEA=</HashCode>
+      <FileName>Assets\Scripts\VisualizeImage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CategoryItem">
+    <Position X="19.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQQAACAACAAAAAAAAAAAAACAAAAAAAACAAIAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\CategoryItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Initializer">
+    <Position X="27" Y="0.5" Width="2.5" />
+    <Members>
+      <Field Name="_json" Hidden="true" />
+      <Field Name="_parameters" Hidden="true" />
+      <Field Name="CANVAS" Hidden="true" />
+      <Method Name="LoadJson" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAIAABQAACAEAAAAAAACBQACAQAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\Initializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItensManager">
+    <Position X="22" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAIAAAAAEAAAIAAGAAAAEAAGA=</HashCode>
+      <FileName>Assets\Scripts\ItensManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScreenManager">
+    <Position X="23" Y="5.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAFIgAAAAAAMACAEABAABAEAQAAEAABAEA=</HashCode>
+      <FileName>Assets\Scripts\ScreenManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnityEngine.MonoBehaviour" Collapsed="true">
+    <Position X="23.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Assets.Classes.AppScreenParameters">
+    <Position X="26.25" Y="12.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BAAAABAIBAAAAAAABUACAAAAAAAAAAQACAAgAAAAkBA=</HashCode>
+      <FileName>Assets\Scripts\Classes\AppScreenParameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.Classes.Category">
+    <Position X="20.75" Y="12.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AQBAAAAAAAAAgBAAAAAAAAQIkAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Classes\Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleJSON.JSON">
+    <Position X="29" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Classes\SimpleJSON.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.Classes.Item">
+    <Position X="23.75" Y="12.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAggACAABAAIgIAAAAAAhIAAAACAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Classes\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="23.5" Y="11.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Enum Name="Assets.Scripts.Enum.Dificulty">
+    <Position X="17.75" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACIAAACAAAAAAAAAEAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Assets\Scripts\Enum\Dificulty.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Assets.Scripts.Enum.ContentType">
+    <Position X="17.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAQAA=</HashCode>
+      <FileName>Assets\Scripts\Enum\Type.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

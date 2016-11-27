@@ -2,13 +2,11 @@
 using System.Collections;
 using Assets.Scripts.Enum;
 using UnityEngine.UI;
+using Assets.Scripts.Classes;
 
 public class CategoryItem : MonoBehaviour {
 
-    private int _ID;
-    private string _Name;
-    private ContentType _ContentType;
-    private Dificulty _Dificult;
+    private Category category;
 
 	// Use this for initialization
 	void Start () {
@@ -19,12 +17,13 @@ public class CategoryItem : MonoBehaviour {
 	void Update () {
 	
 	}
-    public void setParams(int id, string name, int type, int dificulty)
+    public void setParams(int id, string name, int type, int dificulty, string iconPath)
     {
-        _ID = id;
-        _Name = name;
-        _ContentType = (ContentType)type;
-        _Dificult = (Dificulty)dificulty;
+        category = new Category(id, name, type, dificulty, iconPath);
+        //_ID = id;
+        //_Name = name;
+        //_ContentType = (ContentType)type;
+        //_Dificult = (Dificulty)dificulty;
 
         InitializeComponent();
 
@@ -39,7 +38,7 @@ public class CategoryItem : MonoBehaviour {
     private void setDificultyLevel()
     {
         var image = this.gameObject.GetComponent<Image>();
-        switch (this._Dificult)
+        switch ((Dificulty)this.category.Dificulty)
         {
             case Dificulty.Very_Easy:
                 image.color = Color.white;
@@ -66,7 +65,7 @@ public class CategoryItem : MonoBehaviour {
 
     public void showCategoryItems()
     {
-        Debug.LogWarning(" categoria :" + _Name + " was touched");
-        ScreenManager.instance.navigateTo(_Name);
+       // Debug.LogWarning(" categoria :" + _Name + " was touched");
+        ScreenManager.instance.navigateToCategory(category);
     }
 }

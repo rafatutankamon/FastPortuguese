@@ -22,18 +22,21 @@ public class Initializer : MonoBehaviour {
  
 	void Start () 
     {
-      
+      //private AppScreenParameters _parameters;
        _parameters = new AppScreenParameters();
        ScaleAdjustPrefabs();
+       CreateCategories();
+       //LoadJson();
        //var gd = content.GetComponent<RectTransform>();
        //var cs = content.GetComponent<ContentSizeFitter>();
        //Debug.LogWarning("initial height " + gd.rect.height);
        //_json = LoadResourceTextfile("categories.json");
-       string jsn = Resources.Load<TextAsset>("categories").text;
-       //JsonData jsonBooks = JsonMapper.ToObject(jsn);
-       JSONNode node = JSON.Parse(jsn);
-      // var name = from c in node["data"]["categories"][0]["name"] select c;
-       JSONArray categories = node["data"]["categories"].AsArray;
+      // string jsn = Resources.Load<TextAsset>("categories").text;
+      // //JsonData jsonBooks = JsonMapper.ToObject(jsn);
+      // JSONNode node = JSON.Parse(jsn);
+      //// var name = from c in node["data"]["categories"][0]["name"] select c;
+      // JSONArray categories = node["data"]["categories"].AsArray;
+      // CreateCategoryItens();
       /*
        for (var i = 0; i < categories.Count;i++ )
        {
@@ -50,46 +53,38 @@ public class Initializer : MonoBehaviour {
        }*/
        
        
-       foreach( var c in Categories.instance.CategoryList)
-       {
-           GameObject go = Instantiate(categoryItemPrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
-                                                                       
-           go.transform.SetParent(grid_Categories.transform);
-           
-           go.GetComponentInChildren<Text>().text = c.Name;
-           go.GetComponent<CategoryItem>().setParams(c.ID, c.Name,c.ContentType,c.Dificulty);           
-       }
+       
    
        //Debug.LogWarning("name" + name);
        
    	}
-	
-    void CreateCategoryItens(string optionalCategory = "favoritos")
+
+    /*private void LoadJson()
     {
-       /* grid_Itens.GetComponent<RectTransform>().rect.position.Set(0,0);
-        //rt.sizeDelta = new Vector2(0, 20 * 120);
-        for (int x = 0; x < 20; x++)
-        {
-            //inatancia o objeto da lista
-            GameObject go = Instantiate(listItemPrefab, new Vector3(0, _parameters.ListItem.Height * x, 0), Quaternion.identity) as GameObject;            
-            go.transform.SetParent(grid_Itens.transform);
-            
-                    
-        }
-        var rt = grid_Itens.GetComponent<RectTransform>();
-        grid_Itens.GetComponent<RectTransform>().rect.position.Set(0, (rt.sizeDelta.y / 2) * -1);
-               */ 
-    }
+        string jsn = Resources.Load<TextAsset>("categories").text;
+        //JsonData jsonBooks = JsonMapper.ToObject(jsn);
+        JSONNode node = JSON.Parse(jsn);
+        // var name = from c in node["data"]["categories"][0]["name"] select c;
+        JSONArray categories = node["data"]["categories"].AsArray;
+        CreateCategories();
+    }*/
+	
+   /* void CreateCategoryItens(string optionalCategory = "favoritos")
+    {
+       
+               
+    }*/
     void CreateCategories()
-    {        
-        /*for (int x = 0; x < 20; x++)
+    {
+        foreach (var c in Categories.instance.CategoryList)
         {
-            //inatancia o objeto da lista
-            GameObject go = Instantiate(categoryItemPrefab, new Vector3(x, x, 0), Quaternion.identity) as GameObject;           
+            GameObject go = Instantiate(categoryItemPrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+
             go.transform.SetParent(grid_Categories.transform);
-           
+
+            go.GetComponentInChildren<Text>().text = c.Name;
+            go.GetComponent<CategoryItem>().setParams(c.ID, c.Name, c.ContentType, c.Dificulty, c.IconPath);
         }
-        */
     }
 
     
@@ -111,7 +106,7 @@ public class Initializer : MonoBehaviour {
         */
 
         //CreateCategoryItens();
-        CreateCategories();
+       // CreateCategories();
        
     }
    

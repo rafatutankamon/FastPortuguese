@@ -1,15 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;       //Allows us to use Lists. 
+using UnityEngine.SceneManagement;
+using Assets.Scripts.Classes;
+using Assets.Classes;       //Allows us to use Lists. 
 
       
 public class ScreenManager : MonoBehaviour
 {
 
         public static ScreenManager instance = null;              //Static instance of ScreeManager which allows it to be accessed by any other script.
-        private int level = 1;                                  //Current level number, expressed in game as "Day 1".
+        public AppScreenParameters _parameters;
+                                      
+        private static string lastLevel;
         private int CategoryId;
         private string categoryName;
+
+        public static void setLastLevel(string level)
+        {
+            lastLevel = level;
+        }
+
+        public static string LastLevel()
+        {
+            return lastLevel;
+        }
+
+        public static void BackToPreviousLevel()
+        {
+            Application.LoadLevel(lastLevel);
+        }
         //Awake is always called before any Start functions
         void Awake()
         {
@@ -30,22 +49,30 @@ public class ScreenManager : MonoBehaviour
             
                       
             //Call the InitGame function to initialize the first level 
-            InitGame();
+           // InitGame();
         }
         
         //Initializes the game for each level.
-        void InitGame()
+        /*void InitGame()
         {
                         
-        }
-        public void navigateTo(string category)
+        }*/
+        public void navigateToCategory(Category category)
         {
-            this.categoryName = category;
+            this.categoryName = category.Name;
+            this.CategoryId = category.ID;
             //Application.LoadLevel(1);
             SceneManager.LoadScene(1, LoadSceneMode.Single);
         }
+        public void navigateToLevel(int level, LoadSceneMode mode)
+        {            
+            //Application.LoadLevel(1);
+            
+            SceneManager.LoadScene(level, mode);
+        }
         public void backToPreviousScreen()
         {
+            //Application.LoadLevel(lastLevel);
             Application.LoadLevel(0);
         }
         public string getCategoryName()
@@ -53,6 +80,16 @@ public class ScreenManager : MonoBehaviour
             return this.categoryName;
         }
         
+        public void LoadImage(string imagePath)
+        {
+            SceneManager.LoadScene(1, LoadSceneMode.Additive);
+        }
+
+        public void ShowMenu()
+        {
+            SceneManager.LoadScene(1, LoadSceneMode.Additive);
+        }
+
         //Update is called every frame.
         void Update()
         {
