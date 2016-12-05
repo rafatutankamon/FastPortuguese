@@ -1,0 +1,28 @@
+{
+"version": "1.0",
+    "data": {
+            "categoriyItens":[
+                          {"ID": 1,"categoryID":2,"text": "Strawberry","trasnlation": "Morango","audioPath": "morango.mp3",
+                             "imagePath": "morango.png"},
+                          {"ID": 2,"categoryID":2,"text": "Apple","trasnlation": "Maçã",
+                             "audioPath": "maca.mp3",
+                             "imagePath": "maca.png"},
+                          {"ID": 3,"categoryID":2,"text": "Cherry","trasnlation": "Cereja",
+                             "audioPath": "cereja.mp3",
+                             "imagePath": "cereja.png"},
+                          {"ID": 4,"categoryID":2,"text":"Avocado","trasnlation": "Abacate",
+                             "audioPath": "abacate.mp3",
+                             "imagePath": "abacate.png"},
+                          {"ID": 5,"categoryID":2,
+                              "text":"Pineapple",
+                              "trasnlation": "Abacaxi",
+                              "audioPath": "abacaxi.mp3",
+                              "imagePath": "abacaxi.png"},
+                          {"ID": 6,"categoryID":2,"text": "Orange","trasnlation": "Laranja",
+                             "audioPath": "laranja.mp3",
+                             "imagePath": "laranja.png"},
+                          {"ID": 7,"categoryID":2,"text": "Grape","trasnlation": "Uva","audioPath": "uva.mp3","imagePath": "uva.png"}
+                        ]
+                        
+    }
+}

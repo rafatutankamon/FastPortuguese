@@ -1,4 +1,20 @@
-﻿using UnityEngine;
+﻿/*Copyright (C) <2016>  <Rafael Quevedo Pereira>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA*/
+
+using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using Assets.Scripts.Classes;
@@ -8,24 +24,31 @@ using Assets.Classes;       //Allows us to use Lists.
 public class ScreenManager : MonoBehaviour
 {
 
-        public static ScreenManager instance = null;              //Static instance of ScreeManager which allows it to be accessed by any other script.
+        private static ScreenManager _instance = null;              //Static instance of ScreeManager which allows it to be accessed by any other script.
         public AppScreenParameters _parameters;
                                       
         private static string lastLevel;
         private int CategoryId;
         private string categoryName;
 
-        public static void setLastLevel(string level)
+        public static ScreenManager Instance 
+        {
+            get
+            {
+                return _instance;   
+            }
+        }
+        public void setLastLevel(string level)
         {
             lastLevel = level;
         }
 
-        public static string LastLevel()
+        public string LastLevel()
         {
             return lastLevel;
         }
 
-        public static void BackToPreviousLevel()
+        public void BackToPreviousLevel()
         {
             Application.LoadLevel(lastLevel);
         }
@@ -33,13 +56,13 @@ public class ScreenManager : MonoBehaviour
         void Awake()
         {
             //Check if instance already exists
-            if (instance == null)
+            if (_instance == null)
                 
                 //if not, set instance to this
-                instance = this;
+                _instance = this;
             
             //If instance already exists and it's not this:
-            else if (instance != this)
+            else if (_instance != this)
                 
                 //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
                 Destroy(gameObject);    
@@ -49,14 +72,14 @@ public class ScreenManager : MonoBehaviour
             
                       
             //Call the InitGame function to initialize the first level 
-           // InitGame();
+           InitGame();
         }
         
         //Initializes the game for each level.
-        /*void InitGame()
+        void InitGame()
         {
-                        
-        }*/
+            _parameters = new AppScreenParameters();            
+        }
         public void navigateToCategory(Category category)
         {
             this.categoryName = category.Name;
