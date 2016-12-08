@@ -47,7 +47,7 @@ namespace Assets.Scripts.Classes
 
             //This para o editor não destruir esse objeto a cada load.
             DontDestroyOnLoad(gameObject);
-            initialize();   
+            //initialize();   
         }
 
         private void initialize()
@@ -104,5 +104,5 @@ namespace Assets.Scripts.Classes
 
         }
     }
-   // myObject = JsonUtility.FromJson<MyClass>(json);
+   
 }

@@ -27,7 +27,7 @@ public class ScreenManager : MonoBehaviour
         private static ScreenManager _instance = null;              //Static instance of ScreeManager which allows it to be accessed by any other script.
         public AppScreenParameters _parameters;
                                       
-        private static string lastLevel;
+        private string lastLevel;
         private int CategoryId;
         private string categoryName;
 
@@ -40,17 +40,19 @@ public class ScreenManager : MonoBehaviour
         }
         public void setLastLevel(string level)
         {
+            lastLevel = "";
             lastLevel = level;
         }
 
-        public string LastLevel()
+        public string getLastLevel()
         {
             return lastLevel;
         }
 
         public void BackToPreviousLevel()
         {
-            Application.LoadLevel(lastLevel);
+            //Application.LoadLevel(getLastLevel());
+            SceneManager.LoadScene(SceneManager.GetSceneByName(lastLevel).buildIndex, LoadSceneMode.Single);
         }
         //Awake is always called before any Start functions
         void Awake()
@@ -85,7 +87,7 @@ public class ScreenManager : MonoBehaviour
             this.categoryName = category.Name;
             this.CategoryId = category.ID;
             //Application.LoadLevel(1);
-            SceneManager.LoadScene(1, LoadSceneMode.Single);
+            SceneManager.LoadScene(2, LoadSceneMode.Single);
         }
         public void navigateToLevel(int level, LoadSceneMode mode)
         {            
@@ -95,14 +97,17 @@ public class ScreenManager : MonoBehaviour
         }
         public void backToPreviousScreen()
         {
-            //Application.LoadLevel(lastLevel);
-            Application.LoadLevel(0);
+            Application.LoadLevel(lastLevel);
+            //Application.LoadLevel(0);
         }
         public string getCategoryName()
         {
             return this.categoryName;
         }
-        
+        public int getCategoryID()
+        {
+            return this.CategoryId;
+        }
         public void LoadImage(string imagePath)
         {
             SceneManager.LoadScene(1, LoadSceneMode.Additive);

@@ -35,7 +35,7 @@ public class CategoryItem : MonoBehaviour {
 	}
     public void setParams(int id, string name, int type, int dificulty, string iconPath)
     {
-        Debug.LogWarning("dificulty : "+dificulty);
+        //Debug.LogWarning("dificulty : "+dificulty);
         category = new Category(id, name, type, dificulty, iconPath);
         InitializeComponent();
 
@@ -79,7 +79,10 @@ public class CategoryItem : MonoBehaviour {
 
     public void showCategoryItems()
     {
-       // Debug.LogWarning(" categoria :" + _Name + " was touched");
+       
+        var level = Application.loadedLevelName;
+        Debug.LogWarning(level + " last level loaded");
+        ScreenManager.Instance.setLastLevel(level);
         ScreenManager.Instance.navigateToCategory(category);
     }
 }

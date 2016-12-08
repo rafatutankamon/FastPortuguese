@@ -19,13 +19,14 @@ using System.Collections;
 using UnityEngine.UI;
 using Assets.Scripts.Classes;
 using Assets.Scripts.Enum;
-
+using System.Linq;
 public class ItensManager : MonoBehaviour {
 
     public Text categoryName;
     public GameObject prefabType1;
-    public GameObject prefabType2;
-    public GameObject prefabType3;
+    public GameObject gridItens;
+   /* public GameObject prefabType2;
+    public GameObject prefabType3;*/
 
     void Awake()
     {
@@ -36,17 +37,18 @@ public class ItensManager : MonoBehaviour {
     {
         categoryName.text = ScreenManager.Instance.getCategoryName();
         ScaleAdjustPrefabs();
-        foreach (var c in Categories.instance.CategoryList)
-        {
-            CreateCategoryItens(c);
-        }
         
+        Category cat = Categories.instance._categories.First(c => c.ID == ScreenManager.Instance.getCategoryID());
+        CreateCategoryItens(cat);
     }
     void CreateCategoryItens(Category category)
     {
-        foreach(var c in Categories.instance.CategoryList)
+        foreach(var c in category.ItensList)
         {
-            var go = GetPrefabToInstantiate((ContentType)c.ContentType);
+            //var go = GetPrefabToInstantiate(ContentType.Text);
+            var go = Instantiate(prefabType1);
+            go.transform.SetParent(gridItens.transform);
+            //go.GetComponent
         }
         
     }

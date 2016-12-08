@@ -41,7 +41,7 @@ namespace Assets.Scripts.Classes
         public List<Item> ItensList { get { return _categoryItens; } }
         */
 
-        public List<Item> ItensList { get { return ItensList; } }
+        public List<Item> ItensList;
         public int ID;
         public string Name;
         public int ContentType;
@@ -50,11 +50,14 @@ namespace Assets.Scripts.Classes
         
         
         public static Category CreateFromJSON(string jsonString)
-        {
+        {           
             return JsonUtility.FromJson<Category>(jsonString);
         }
        
-
+        public void Initialize()
+        {
+            this.ItensList = new List<Item>();
+        }
         public Category(int id, string name, int contentType, int dificulty, string iconPath)
         {
             this.ID = id;
@@ -62,6 +65,7 @@ namespace Assets.Scripts.Classes
             this.ContentType = contentType;
             this.Dificulty = dificulty;
             this.IconPath = iconPath;
+            ItensList = new List<Item>();
         }
 
         //o item será adicionado após instanciado com os parâmetros corretos.

@@ -29,15 +29,18 @@ namespace Assets.Scripts
     {
         JSONArray categories;
         JSONArray categoryItens;
-        List<Item> catItens;
+        public List<Item> catItens;
+        public List<Category> categoryList;
         void Awake()
-        {
-            this.gameObject.AddComponent<ScreenManager>();
-
+        {            
+            catItens = new List<Item>();
+            categoryList = new List<Category>();
+            var go = new GameObject().AddComponent<Categories>();
+            go.name = "__Categories";
         }
         void Start()
         {
-            List<Item> catItens = new List<Item>();
+            
             ShowLoading();
             TryLoadJSON();
         }
@@ -61,7 +64,8 @@ namespace Assets.Scripts
             catch (Exception e)
             {
                 Debug.LogWarning(e);
-                RestoreBackupJSON();
+                return;
+               // RestoreBackupJSON();
             } 
                 
             
@@ -82,6 +86,9 @@ namespace Assets.Scripts
             foreach (var i in categories)
             {
                 Category c = Category.CreateFromJSON(i.ToString());
+                c.Initialize();
+                categoryList.Add(c);
+                //Debug.LogWarning(c.Name);
                 //Categories.instance.AddCategory(c);
                 CreateCategoryItens(c);
             }            
@@ -96,7 +103,9 @@ namespace Assets.Scripts
                 foreach (var i in categoryItens)
                 {
                     Item c = Item.CreateFromJSON(i.ToString());
+                    //Debug.LogWarning(i);
                     catItens.Add(c);
+                    
                 }
             }
             //seleciona apenas os itens referentes a categoria
@@ -104,13 +113,13 @@ namespace Assets.Scripts
                 from item in catItens
                 where item.CategoryId = category.ID
                 select item;*/
-            List<Item> filter = catItens.Where(c => c.CategoryId == category.ID).ToList();
+            List<Item> filter = catItens.Where(c => c.CategoryID == category.ID).ToList();
             foreach (var c in filter)
             {                
                 category.CreateItem(c.Text,c.Translation,c.AudioPath,c.ImagePath);
             }
             //adicioa a categoria com os itens na instancia do categories.
-            Categories.instance.AddCategory(category);
+           // Categories.instance.AddCategory(category);
         }
 
         public void ShowError()
@@ -123,12 +132,19 @@ namespace Assets.Scripts
         }
         public void HideLoading()
         {
-            FinishSplash();
+            //FinishSplash();
+            GameObject.Find("__TxtLoading").SetActive(false);
+            GameObject.Find("__BtnStart").transform.localScale = new Vector3(1f,1f,1f);
         }
-        void FinishSplash()
+        public void FinishSplash()
         {
             var level = Application.loadedLevelName;
             ScreenManager.Instance.setLastLevel(level);
+            foreach(var c in categoryList)
+            {
+                Categories.instance.AddCategory(c);
+            }
+
             ScreenManager.Instance.navigateToLevel(1, LoadSceneMode.Single);
             //call sreenmanger to change level
         }

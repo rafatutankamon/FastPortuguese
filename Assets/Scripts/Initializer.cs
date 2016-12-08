@@ -28,7 +28,7 @@ public class Initializer : MonoBehaviour {
     private string _json;
 
     //public
-    public GameObject CANVAS;
+    public Canvas CANVAS;
    // public GameObject listItemPrefab;
     public GameObject categoryItemPrefab;
    // public GameObject grid_Itens;

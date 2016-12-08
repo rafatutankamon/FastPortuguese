@@ -14,6 +14,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA*/
 
+using Assets.Scripts.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,27 @@ namespace Assets.Scripts
 {
     class Menu : MonoBehaviour
     {
+        public List<Item> _favorites;
+        public static Menu instance = null;  
         void Awake()
-        {
+        {          
+            _favorites = new List<Item>();
+            //verifica se ja existe uma instancia
+            if (instance == null)
 
+                //se não seta esta instancia como a instancia ativa
+                instance = this;
+
+            //se ja existir uma instancia e não for essa
+            else if (instance != this)
+
+                //destoy essa instancia, pois não a primeira que foi criada
+                Destroy(gameObject);
+
+            //This para o editor não destruir esse objeto a cada load.
+            DontDestroyOnLoad(gameObject);
+            //initialize();   
+        
         }
         void Start()
         {
@@ -37,11 +56,27 @@ namespace Assets.Scripts
         {
 
         }
+        public void AddFavorite(Item favorite)
+        {
+            _favorites.Add(favorite);
+        }
+        public void RemoveFavorite(Item favorite)
+        {
+            _favorites.Remove(favorite);
+        }
         public void ShowAbout()
         {
 
         }
         public void ShowTexts()
+        {
+
+        }
+        public void OpenMenu()
+        {
+
+        }
+        public void CloseMenu()
         {
 
         }
