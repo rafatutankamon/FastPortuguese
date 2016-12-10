@@ -92,20 +92,26 @@ public class Initializer : MonoBehaviour {
     }*/
     void CreateCategories()
     {
-        foreach (var c in Categories.instance.CategoryList)
+        var x = 0;
+        //foreach (var c in Categories.instance.CategoryList)
+        for (var i = 0; i <= 20;i++ )
         {
-            GameObject go = Instantiate(categoryItemPrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+            GameObject go = Instantiate(categoryItemPrefab, new Vector3(x * _parameters.ItemListContainerSize.x, x * _parameters.ItemListContainerSize.y, 0), Quaternion.identity) as GameObject;
+
 
             go.transform.SetParent(grid_Categories.transform);
 
-            go.GetComponentInChildren<Text>().text = c.Name;
-            go.GetComponent<CategoryItem>().setParams(c.ID, c.Name, c.ContentType, c.Dificulty, c.IconPath);
+            /* go.GetComponentInChildren<Text>().text = c.Name;
+             go.GetComponent<CategoryItem>().setParams(c.ID, c.Name, c.ContentType, c.Dificulty, c.IconPath);
+             x += 1;*/
         }
     }
 
     
     private void ScaleAdjustPrefabs()
     {
+        var rt = categoryItemPrefab.GetComponent<RectTransform>();
+        rt.sizeDelta = _parameters.CatgoryContainerSize;
         header.GetComponentInChildren<Text>().text = _parameters.MaxWidth + " x " + _parameters.MaxHeight +"-"+ _parameters.CatgoryContainerSize.x +" "+_parameters.CatgoryContainerSize.y;
         grid_Categories.GetComponent<GridLayoutGroup>().cellSize = _parameters.CatgoryContainerSize;
        // grid_Categories.GetComponent<GridLayoutGroup>().spacing = new Vector2(_parameters.CatgoryContainerSize.x,_parameters.CatgoryContainerSize.y);

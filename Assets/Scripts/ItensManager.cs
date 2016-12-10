@@ -20,6 +20,7 @@ using UnityEngine.UI;
 using Assets.Scripts.Classes;
 using Assets.Scripts.Enum;
 using System.Linq;
+using Assets.Classes;
 public class ItensManager : MonoBehaviour {
 
     public Text categoryName;
@@ -27,28 +28,42 @@ public class ItensManager : MonoBehaviour {
     public GameObject gridItens;
    /* public GameObject prefabType2;
     public GameObject prefabType3;*/
-
+    AppScreenParameters _parameters;
     void Awake()
     {
-
+        _parameters = new AppScreenParameters();
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown("space"))
+            ScreenManager.Instance.navigateToLevel(1, UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
     // Use this for initialization
     void Start()
     {
-        categoryName.text = ScreenManager.Instance.getCategoryName();
+        // categoryName.text = ScreenManager.Instance.getCategoryName();
         ScaleAdjustPrefabs();
         
         Category cat = Categories.instance._categories.First(c => c.ID == ScreenManager.Instance.getCategoryID());
         CreateCategoryItens(cat);
+        /*for(var x = 0; x<=20; x++)
+        {
+            GameObject go = Instantiate(prefabType1, new Vector3(0, (x * _paramenters.ItemListContainerSize.y), 0), Quaternion.identity) as GameObject;
+            go.transform.SetParent(gridItens.transform);
+            go.transform.localScale = new Vector3(1f, 1f, 1f);
+        }*/
     }
     void CreateCategoryItens(Category category)
     {
+        var x = 0;
         foreach(var c in category.ItensList)
         {
             //var go = GetPrefabToInstantiate(ContentType.Text);
-            var go = Instantiate(prefabType1);
+            GameObject go = Instantiate(prefabType1, new Vector3(0, (x * _parameters.ItemListContainerSize.y), 0), Quaternion.identity) as GameObject;
             go.transform.SetParent(gridItens.transform);
+            go.transform.localScale = new Vector3(1f, 1f, 1f);
             //go.GetComponent
+            x += 1;
         }
         
     }
@@ -70,6 +85,7 @@ public class ItensManager : MonoBehaviour {
     }
     public void ScaleAdjustPrefabs()
     {
-
+        var rt = prefabType1.GetComponent<RectTransform>();
+        rt.sizeDelta = _parameters.ItemListContainerSize;
     }
 }
