@@ -30,8 +30,8 @@ namespace Assets.Scripts.Classes
         public string Text;
         public string Translation;
         public string AudioPath;
-        public string ImagePath; 
-
+        public string ImagePath;
+        public bool IsFavorite;
       
         //construtor vazio
         public Item()
@@ -53,5 +53,23 @@ namespace Assets.Scripts.Classes
             this.ImagePath = imagePath;
         }
 
+        public void Clear()
+        {
+            this.ID = 0;
+            this.CategoryID = 0;
+            this.Text = "";
+            this.Translation = "";
+            this.AudioPath = "";
+            this.ImagePath = "";
+        }
+        public void Clone(Item item)
+        {
+            this.ID = item.ID;
+            this.CategoryID = item.CategoryID;
+            this.Text = item.Text;
+            this.Translation = item.Translation;
+            this.AudioPath = item.AudioPath;
+            this.ImagePath = item.ImagePath;
+        }
     }
 }

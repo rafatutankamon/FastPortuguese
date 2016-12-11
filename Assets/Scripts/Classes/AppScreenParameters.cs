@@ -32,7 +32,7 @@ namespace Assets.Classes
         private Vector2 _catgoryContainerSize; // Size of container of category icon, 25% body height 50 % body width
         private Vector2 _itemListContainerSize;  // Size of elements of list items, must be 12,5% of body height and 100 % of body width
         private ListItem _listItem;
-
+        
         public float MaxWidth { get { return _maxWidth; } }
         public float MaxHeight { get { return _maxHeight; } }
         public float HeaderHeight { get { return _headerHeight; }}
@@ -47,7 +47,8 @@ namespace Assets.Classes
             this._maxHeight = Screen.height;
             this._headerHeight = _maxHeight / 10f;
             this._bodyHeight = _maxHeight - _headerHeight;
-            this._catgoryContainerSize = new Vector2(_maxWidth * 0.45f,_bodyHeight * 0.25f);
+            //this._catgoryContainerSize = new Vector2(_maxWidth * 0.5f,_bodyHeight * 0.25f);
+            this._catgoryContainerSize = new Vector2(_maxWidth , _bodyHeight * 0.30f);
             this._itemListContainerSize = new Vector2( _maxWidth ,_bodyHeight * 0.2f);
             this._listItem = new ListItem(_itemListContainerSize.x, _itemListContainerSize.y);
             //ListItem =  new ListItem();

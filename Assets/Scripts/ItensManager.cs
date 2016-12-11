@@ -21,6 +21,7 @@ using Assets.Scripts.Classes;
 using Assets.Scripts.Enum;
 using System.Linq;
 using Assets.Classes;
+using Assets.Scripts;
 public class ItensManager : MonoBehaviour {
 
     public Text categoryName;
@@ -62,6 +63,7 @@ public class ItensManager : MonoBehaviour {
             GameObject go = Instantiate(prefabType1, new Vector3(0, (x * _parameters.ItemListContainerSize.y), 0), Quaternion.identity) as GameObject;
             go.transform.SetParent(gridItens.transform);
             go.transform.localScale = new Vector3(1f, 1f, 1f);
+            go.GetComponent<CategorySubItem>().Initialize(c);
             //go.GetComponent
             x += 1;
         }

@@ -49,7 +49,7 @@ public class CategoryItem : MonoBehaviour {
 
     private void setDificultyLevel()
     {
-        var image = this.gameObject.GetComponent<Image>();
+        var image = this.gameObject.transform.FindChild("__Moldura").GetComponent<Image>();
 
         
         switch ((Dificulty)this.category.Dificulty)
@@ -81,7 +81,7 @@ public class CategoryItem : MonoBehaviour {
     {
        
         var level = Application.loadedLevelName;
-        Debug.LogWarning(level + " last level loaded");
+        //Debug.LogWarning(level + " last level loaded");
         ScreenManager.Instance.setLastLevel(level);
         ScreenManager.Instance.navigateToCategory(category);
     }

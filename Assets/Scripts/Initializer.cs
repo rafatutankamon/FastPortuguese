@@ -92,18 +92,38 @@ public class Initializer : MonoBehaviour {
     }*/
     void CreateCategories()
     {
-        var x = 0;
-        //foreach (var c in Categories.instance.CategoryList)
-        for (var i = 0; i <= 20;i++ )
+        var loopIndex = 0;
+        var objIndex = -1;
+        float headSpacingAdd = _parameters.HeaderHeight;
+        List<GameObject> categoryCell = new List<GameObject>();
+        foreach (var c in Categories.instance.CategoryList)
+       // for (var i = 0; i <= 20;i++ )
         {
-            GameObject go = Instantiate(categoryItemPrefab, new Vector3(x * _parameters.ItemListContainerSize.x, x * _parameters.ItemListContainerSize.y, 0), Quaternion.identity) as GameObject;
-
-
-            go.transform.SetParent(grid_Categories.transform);
-
-            /* go.GetComponentInChildren<Text>().text = c.Name;
-             go.GetComponent<CategoryItem>().setParams(c.ID, c.Name, c.ContentType, c.Dificulty, c.IconPath);
-             x += 1;*/
+            if(IsEven(loopIndex))
+            {
+                GameObject go = Instantiate(categoryItemPrefab, new Vector3(0, (loopIndex * _parameters.CatgoryContainerSize.y), 0), Quaternion.identity) as GameObject;
+                go.transform.SetParent(grid_Categories.transform);
+                go.transform.localScale = new Vector3(1f, 1f, 1f);
+                categoryCell.Add(go);
+                objIndex += 1;
+                GameObject leftChild= go.transform.FindChild("__LeftItem").gameObject;
+                leftChild.GetComponentInChildren<Text>().text = c.Name;
+                leftChild.GetComponent<CategoryItem>().setParams(c.ID, c.Name, c.ContentType, c.Dificulty, c.IconPath);
+            }
+            else
+            {
+                GameObject rightChild = categoryCell[objIndex].transform.FindChild("__RightItem").gameObject;
+                rightChild.GetComponentInChildren<Text>().text = c.Name;
+                rightChild.GetComponent<CategoryItem>().setParams(c.ID, c.Name, c.ContentType, c.Dificulty, c.IconPath);
+            }
+           //
+            //go.GetComponentInChildren<Text>().text = c.Name;
+           // go.GetComponent<CategoryItem>().setParams(c.ID, c.Name, c.ContentType, c.Dificulty, c.IconPath);
+            loopIndex += 1;
+        }
+        if(IsEven(loopIndex))
+        {
+            categoryCell[objIndex].transform.FindChild("__RightItem").gameObject.SetActive(false);
         }
     }
 
@@ -112,8 +132,15 @@ public class Initializer : MonoBehaviour {
     {
         var rt = categoryItemPrefab.GetComponent<RectTransform>();
         rt.sizeDelta = _parameters.CatgoryContainerSize;
-        header.GetComponentInChildren<Text>().text = _parameters.MaxWidth + " x " + _parameters.MaxHeight +"-"+ _parameters.CatgoryContainerSize.x +" "+_parameters.CatgoryContainerSize.y;
-        grid_Categories.GetComponent<GridLayoutGroup>().cellSize = _parameters.CatgoryContainerSize;
+        //header.GetComponentInChildren<Text>().text = _parameters.MaxWidth + " x " + _parameters.MaxHeight +"-"+ _parameters.CatgoryContainerSize.x +" "+_parameters.CatgoryContainerSize.y;
+       // header.GetComponent<RectTransform>().sizeDelta = new Vector2(_parameters.MaxWidth, _parameters.HeaderHeight);
+        /*var grid = grid_Categories.GetComponent<GridLayoutGroup>();
+        float space = _parameters.CatgoryContainerSize.x + (_parameters.CatgoryContainerSize.x * 0.15f);
+        int padding = (int)(_parameters.HeaderHeight + (_parameters.HeaderHeight * 0.65f));
+        grid.cellSize = _parameters.CatgoryContainerSize;
+        grid.spacing = new Vector2(space, space);
+        grid.padding.top = padding;
+        grid.padding.bottom = padding;*/
        // grid_Categories.GetComponent<GridLayoutGroup>().spacing = new Vector2(_parameters.CatgoryContainerSize.x,_parameters.CatgoryContainerSize.y);
        // grid_Categories.GetComponent<GridLayoutGroup>().padding = new RectOffset(10, 10, 5, 5);
         // CANVAS.GetComponent<RectTransform>().sizeDelta = new Vector2(_parameters.MaxWidth, _parameters.MaxHeight);
@@ -131,6 +158,9 @@ public class Initializer : MonoBehaviour {
        // CreateCategories();
        
     }
-   
+    public bool IsEven(int value)
+    {
+        return value % 2 == 0;
+    }
  
 }

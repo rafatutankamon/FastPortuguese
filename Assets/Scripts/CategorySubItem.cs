@@ -20,12 +20,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
     class CategorySubItem : MonoBehaviour
     {
-        private Item item;
+        public Text Text;
+        public Text Translation;
+        public Image btn_Favorite;
+        /*public Image btn_Play;
+        public Image btn_Pause;
+        public Image btn_Stop;*/
+        public Image itemImage;
+        public Item item;
 
         void Awake()
         {
@@ -40,8 +48,18 @@ namespace Assets.Scripts
 
         }
 
-        public void Initialize()
+        public void Initialize(Item categoryitem)
         {
+            item.Clone(categoryitem);
+            Text.text = item.Text;  
+            Translation.text = item.Translation;
+            Sprite newSprite =  Resources.Load <Sprite>(item.ImagePath);
+            if (newSprite){
+                itemImage.sprite = newSprite;
+            } else {
+                //itemImage.sprite
+            }
+            
 
         }
         public void SetDificulty()
@@ -58,12 +76,28 @@ namespace Assets.Scripts
         }
         public void VisualizeImage()
         {
-
+            var level = Application.loadedLevelName;
+            //Debug.LogWarning(level + " last level loaded");
+            ScreenManager.Instance.setLastLevel(level);
+            ScreenManager.Instance.NavigateToImageScene(this.item);
         }
         public void AddToFavorites()
         {
             
         }
-       
+        public void PlayAudio()
+        {
+            
+
+        }
+        public void PauseAudio()
+        {
+            
+        }
+        public void StopAudio()
+        {
+            
+        }
+        
     }
 }

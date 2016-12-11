@@ -30,7 +30,8 @@ public class ScreenManager : MonoBehaviour
         private string lastLevel;
         private int CategoryId;
         private string categoryName;
-
+        private Item item;
+        //private int
         public static ScreenManager Instance 
         {
             get
@@ -108,11 +109,16 @@ public class ScreenManager : MonoBehaviour
         {
             return this.CategoryId;
         }
-        public void LoadImage(string imagePath)
+        public void NavigateToImageScene(Item itemToVisualize)
         {
-            SceneManager.LoadScene(1, LoadSceneMode.Additive);
+            item.Clear();
+            item.Clone(itemToVisualize);
+            SceneManager.LoadScene(SceneManager.GetSceneByName("ImageViewScene").buildIndex, LoadSceneMode.Additive);
         }
-
+        public Item GetItemToShow()
+        {
+            return this.item;
+        }
         public void ShowMenu()
         {
             SceneManager.LoadScene(1, LoadSceneMode.Additive);
@@ -121,6 +127,42 @@ public class ScreenManager : MonoBehaviour
         //Update is called every frame.
         void Update()
         {
-            
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                if (Input.GetKey(KeyCode.Escape))
+                {
+                    if (Application.loadedLevelName == "ItensScene")
+                    {
+                        SceneManager.LoadScene(SceneManager.GetSceneByName("MainScene").buildIndex, LoadSceneMode.Single);
+                    }
+                    else if (Application.loadedLevelName == "ImageViewScene")
+                    {
+                        SceneManager.LoadScene(SceneManager.GetSceneByName("ItensScene").buildIndex, LoadSceneMode.Single);
+                    }
+                    else if (Application.loadedLevelName == "MainScene")
+                    {
+                        SceneManager.LoadScene(SceneManager.GetSceneByName("Splash").buildIndex, LoadSceneMode.Single);
+                    }
+                    else if (Application.loadedLevelName == "About")
+                    {
+                        SceneManager.LoadScene(SceneManager.GetSceneByName("MainScene").buildIndex, LoadSceneMode.Single);
+                    }
+                    else if (Application.loadedLevelName == "Menu")
+                    {
+                        SceneManager.UnloadScene(SceneManager.GetSceneByName("Menu").buildIndex);
+                        SceneManager.LoadScene(lastLevel, LoadSceneMode.Single);
+                       
+                    }
+                    else if (Application.loadedLevelName == "Splash")
+                    {
+                        Application.Quit();
+                    }
+                    else
+                    {
+                        SceneManager.LoadScene(lastLevel, LoadSceneMode.Single);
+                    }
+                    return;
+                }
+            }
         }
 }
